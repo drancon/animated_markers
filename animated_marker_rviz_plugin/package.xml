@@ -19,6 +19,7 @@
   <license>BSD</license>
   
   <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>animated_marker_msgs</buildtool_depend>
 
   <build_depend>rviz</build_depend>
   <run_depend>rviz</run_depend>

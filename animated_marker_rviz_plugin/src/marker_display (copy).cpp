@@ -29,8 +29,7 @@
 
 #include <sstream>
 
-#include "ros/ros.h"
-#include "tf2_ros/transform_listener.h"
+#include <tf/transform_listener.h>
 
 #include "markers/mesh_resource_marker.h"
 
@@ -73,10 +72,10 @@ MarkerDisplay::MarkerDisplay()
 
 void MarkerDisplay::onInitialize()
 {
-  tf_filter_ = new tf2_ros::MessageFilter<animated_marker_msgs::AnimatedMarker>( *context_->getTF2BufferPtr(),
-                                                                                fixed_frame_.toStdString(),
-                                                                                queue_size_property_->getInt(),
-                                                                                update_nh_ );
+  tf_filter_ = new tf::MessageFilter<animated_marker_msgs::AnimatedMarker>( *context_->getTFClient(),
+                                                                  fixed_frame_.toStdString(),
+                                                                  queue_size_property_->getInt(),
+                                                                  update_nh_ );
 
   tf_filter_->connectInput(sub_);
   tf_filter_->registerCallback(boost::bind(&MarkerDisplay::incomingMarker, this, _1));
@@ -233,7 +232,7 @@ void MarkerDisplay::incomingMarker( const animated_marker_msgs::AnimatedMarker::
   message_queue_.push_back(marker);
 }
 
-void MarkerDisplay::failedMarker(const ros::MessageEvent<animated_marker_msgs::AnimatedMarker>& marker_evt, tf2_ros::FilterFailureReason reason)
+void MarkerDisplay::failedMarker(const ros::MessageEvent<animated_marker_msgs::AnimatedMarker>& marker_evt, tf::FilterFailureReason reason)
 {
   animated_marker_msgs::AnimatedMarker::ConstPtr marker = marker_evt.getConstMessage();
   std::string authority = marker_evt.getPublisherName();

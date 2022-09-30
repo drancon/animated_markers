@@ -22,7 +22,7 @@ velocities = []
 colors = []
 numPersons = 100
 
-for i in xrange(0, numPersons):
+for i in range(0, numPersons):
     positions.append( (random() * 50 - 25, random() * 50 - 25 ))
     directions.append( random() * 2 * math.pi )
     velocities.append( random() * 1.5 )
@@ -40,7 +40,7 @@ while not rospy.is_shutdown():
     markerArray = AnimatedMarkerArray()
     dt = 0.05
 
-    for i in xrange(0, numPersons):
+    for i in range(0, numPersons):
         positions[i] = (positions[i][0] + math.cos(directions[i]) * velocities[i] * dt, positions[i][1] + math.sin(directions[i]) * velocities[i] * dt)
         markerArray.markers.append( createAnimatedPersonMarker(i, pos=positions[i], thetaDeg=directions[i]*180.0/math.pi, color=colors[i], animationSpeed=velocities[i]) )
 

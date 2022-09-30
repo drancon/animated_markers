@@ -37,8 +37,8 @@
 #include <boost/shared_ptr.hpp>
 
 #ifndef Q_MOC_RUN
-#include <tf/message_filter.h>
-#include <message_filters/subscriber.h>
+#include "tf2_ros/message_filter.h"
+#include "message_filters/subscriber.h"
 #endif
 
 #include <animated_marker_msgs/AnimatedMarker.h>
@@ -145,7 +145,7 @@ private:
    */
   void incomingMarker(const animated_marker_msgs::AnimatedMarker::ConstPtr& marker);
 
-  void failedMarker(const ros::MessageEvent<animated_marker_msgs::AnimatedMarker>& marker_evt, tf::FilterFailureReason reason);
+  void failedMarker(const ros::MessageEvent<animated_marker_msgs::AnimatedMarker>& marker_evt, tf2_ros::FilterFailureReason reason);
 
   typedef std::map<MarkerID, MarkerBasePtr> M_IDToMarker;
   typedef std::set<MarkerBasePtr> S_MarkerBase;
@@ -158,7 +158,7 @@ private:
   boost::mutex queue_mutex_;
 
   message_filters::Subscriber<animated_marker_msgs::AnimatedMarker> sub_;
-  tf::MessageFilter<animated_marker_msgs::AnimatedMarker>* tf_filter_;
+  tf2_ros::MessageFilter<animated_marker_msgs::AnimatedMarker>* tf_filter_;
 
   typedef QHash<QString, animated_marker_rviz_plugin::MarkerNamespace*> M_Namespace;
   M_Namespace namespaces_;

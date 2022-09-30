@@ -27,6 +27,6 @@ def createAnimatedPersonMarker(markerId, pos, thetaDeg, animationSpeed = 1.0, co
     personModelScaleFactor = 2.0 / 7.0 * 1.8
     marker.scale.x = marker.scale.y = marker.scale.z = personModelScaleFactor
 
-    marker.animation_speed = 0.7 * animationSpeed;
+    marker.animation_speed = 0.7 * animationSpeed
 
     return marker
